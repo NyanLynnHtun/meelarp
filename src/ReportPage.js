@@ -12,7 +12,8 @@ export default function ReportPage() {
     'Yangon', 'Ayeyarwady', 'Kachin', 'Kayah', 'Kayin',
     'Chin', 'Mon', 'Rakhine', 'Shan'
   ];
-  const [region, setRegion] = useState(regions[0]);
+  // initial blank selection
+  const [region, setRegion] = useState('');
   const [isOn, setIsOn] = useState(true);
   const [lastReport, setLastReport] = useState(null);
   const debounceRef = useRef(null);
@@ -23,6 +24,9 @@ export default function ReportPage() {
   }, []);
 
   useEffect(() => {
+    // skip auto-submit if no region selected
+    if (!region) return;
+
     clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
       const payload = { region, status: isOn ? 'On' : 'Off' };
@@ -55,24 +59,30 @@ export default function ReportPage() {
             onChange={e => setRegion(e.target.value)}
             className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
+            <option value="" disabled>ဒေသ...</option>
             {regions.map(r => (
               <option key={r} value={r}>{r}</option>
             ))}
           </select>
         </div>
 
-        {/* Status Toggle */}
+        {/* Status Toggle (disabled until region selected) */}
         <div className="flex justify-between items-center mb-6">
           <span className="text-gray-300 font-semibold">Status:</span>
           <button
             onClick={() => setIsOn(!isOn)}
+            disabled={!region}
             className={`relative inline-flex items-center h-8 w-16 rounded-full transition-colors focus:outline-none ${
-              isOn ? 'bg-green-500' : 'bg-red-500'
+              region
+                ? isOn
+                  ? 'bg-green-500'
+                  : 'bg-red-500'
+                : 'bg-gray-600 cursor-not-allowed'
             }`}
           >
             <span
               className={`${
-                isOn ? 'translate-x-8' : 'translate-x-0'
+                isOn && region ? 'translate-x-8' : 'translate-x-0'
               } inline-block w-8 h-8 bg-white rounded-full transform transition-transform`}
             />
           </button>
