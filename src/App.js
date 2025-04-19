@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
+import ReportPage from "./ReportPage";
+import AdminPage from "./AdminPage";
+import LoginPage from "./LoginPage";
+import ProtectedRoute from "./ProtectedRoute";
 
-function App() {
+// NavBar only for admin routes
+function NavBar() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <nav className="bg-gray-800 text-gray-100 p-4 flex space-x-4">
+      <NavLink
+        to="/admin"
+        className={({ isActive }) =>
+          isActive ? 'underline text-blue-400' : 'hover:underline'
+        }
+      >Dashboard</NavLink>
+      <NavLink
+        to="/"
+        end
+        className={({ isActive }) =>
+          isActive ? 'underline text-blue-400' : 'hover:underline'
+        }
+      >Report</NavLink>
+    </nav>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<ReportPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <NavBar />
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+}
