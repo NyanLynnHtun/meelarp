@@ -4,12 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
 
 const slides = [
-  { type: "text", title: "Welcome to the Journey", description: "" },
+  { type: "text", title: "MEE LAR P", description: "" },
   {
     type: "imageText",
     image: "https://fakeimg.pl/400x300",
-    title: "Step 1: Understand the Path",
-    description: "Read carefully and prepare mentally.",
+    title: "Lawyer Video - Opening Statement",
+    description: "",
   },
   {
     type: "exhibits",
