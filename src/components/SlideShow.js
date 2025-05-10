@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
@@ -6,8 +6,8 @@ import "./Slideshow.css";
 const slides = [
   { type: "text", title: "MEE LAR P", description: "" },
   {
-    type: "imageText",
-    image: "https://fakeimg.pl/400x300",
+    type: "videoText",
+    video: "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Opening%20Statement.mp4",
     title: "Lawyer Video - Opening Statement",
     description: "",
   },
@@ -57,7 +57,20 @@ const slides = [
 function Slideshow() {
   const { slideNumber } = useParams(); // Access the slide number from the URL
   const [currentSlide, setCurrentSlide] = useState(Number(slideNumber) || 0);
-
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+  
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+  
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
@@ -94,24 +107,45 @@ function Slideshow() {
       case "text":
         return (
           <div className="text-slide">
-            <h1 className="slide-title">{slide.title}</h1>
+            <h1 className="text-lg">{slide.title}</h1>
             {slide.description && <p>{slide.description}</p>}
           </div>
         );
 
-      case "imageText":
+      // case "imageText":
+      //   return (
+      //     <div className="image-text-slide">
+      //       <img src={slide.image} alt={slide.title} className="slide-image" />
+      //       <h1 className="text-lg">{slide.title}</h1>
+      //       <p>{slide.description}</p>
+      //     </div>
+      //   );
+
+      case "videoText":
         return (
-          <div className="image-text-slide">
-            <img src={slide.image} alt={slide.title} className="slide-image" />
-            <h1 className="slide-title">{slide.title}</h1>
+          <div className="video-text-slide">
+            <div className="video-wrapper">
+              <video
+                ref={videoRef}
+                src={slide.video}
+                className="slide-video"
+                onClick={togglePlay}
+              />
+              {!isPlaying && (
+                <button className="play-button" onClick={togglePlay}>
+                  ▶
+                </button>
+              )}
+            </div>
+            <h1 className="text-lg">{slide.title}</h1>
             <p>{slide.description}</p>
           </div>
         );
-
+        
       case "exhibits":
         return (
           <div className="exhibits-slide">
-            <h1 className="slide-title">Exhibits</h1>
+            <h1 className="text-lg">Exhibits</h1>
             <ul className="exhibits-list">
               {slide.exhibits.map((exhibit, index) => (
                 <li key={index} className="exhibit-item">
