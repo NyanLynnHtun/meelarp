@@ -1,3 +1,6 @@
+/* slideshow-theme.css */
+
+/* Slideshow container */
 .slideshow-container {
     position: relative;
     width: 100vw;
@@ -7,6 +10,7 @@
     overflow: hidden;
   }
   
+  /* Slide content */
   .slide-content {
     position: absolute;
     inset: 0;
@@ -23,7 +27,7 @@
     text-align: center;
   }
   
-  /* Slide specific styles */
+  /* Text slide */
   .text-slide {
     max-width: 800px;
     margin: 0 auto;
@@ -34,6 +38,7 @@
     margin-bottom: 1.5rem;
   }
   
+  /* Image-text slide */
   .image-text-slide .slide-image {
     max-width: 100%;
     height: auto;
@@ -42,7 +47,7 @@
     border-radius: 8px;
   }
   
-  /* Exhibits list styles */
+  /* Exhibits list */
   .exhibits-slide {
     width: 100%;
     max-width: 800px;
@@ -206,33 +211,31 @@
     .slide-title {
       font-size: 2rem;
     }
-    
+  
     .exhibit-content {
       gap: 1rem;
     }
-    
+  
     .exhibit-image-container {
       width: 60px;
       height: 60px;
     }
-    
+  
     .exhibit-title {
       font-size: 1.25rem;
     }
-    
+  
     .exhibit-description {
       font-size: 0.9rem;
     }
-    
+  
     .navigation-controls {
       padding: 0 1rem;
     }
-    
+  
     .nav-button {
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
     }
   }
-
-
   

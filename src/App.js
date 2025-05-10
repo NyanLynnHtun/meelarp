@@ -16,6 +16,7 @@ import ExhibitB from "./exhibits/exhibitb";
 import ExhibitC from "./exhibits/exhibitc";
 import ExhibitD from "./exhibits/exhibitd";
 import ExhibitE from "./exhibits/exhibite";
+import './dark-theme.css';
 
 // NavBar only for admin routes
 function NavBar() {
