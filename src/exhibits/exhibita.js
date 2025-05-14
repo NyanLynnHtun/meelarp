@@ -4,115 +4,13 @@ import { motion } from "framer-motion";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./ExhibitDetail.css";
+import portraitAudioPairs from "../data/portraitAudioData.json";
+import { FaPlayCircle } from "react-icons/fa";
 
 const ExhibitA = () => {
-  const portraitAudioPairs = [
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/01.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/02.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/03.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/04.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/05.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/06.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/07.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/08.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/09.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/10.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/11.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/12.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/13.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/14.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/15.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20Ei%20Phyu%20Lwin.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/16.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    {
-      portrait:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Pictures/17.png",
-      audio:
-        "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Final%20Testimonies/Audio/Electricity%20-%20David%20Suum%20Tung.mp3",
-    },
-    // Add more pairs as needed
-  ];
-
   const [activeIndex, setActiveIndex] = useState(null);
+  const [selectedPair, setSelectedPair] = useState(null);
+  const [showMyanmar, setShowMyanmar] = useState(true);
 
   return (
     <div className="p-20 space-y-12 px-6 py-16 min-h-screen bg-black text-white">
@@ -137,77 +35,100 @@ const ExhibitA = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-               Next →
+              Next →
             </motion.button>
           </Link>
         </div>
       </header>
 
       {/* Exhibition content */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-32 items-center justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10 items-center justify-center">
         {portraitAudioPairs.map((pair, index) => (
           <motion.div
             key={index}
-            className={`flex flex-col items-center bg-transparent p-4 ${
-              activeIndex === index ? "pulse" : ""
-            }`}
+            className="flex flex-col items-center bg-transparent p-4 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
+            onClick={() => {
+              setSelectedPair(pair);
+              setShowMyanmar(true); // reset to MM by default
+            }}
           >
-            <div className="relative w-full h-auto max-w-xs max-h-80 overflow-hidden rounded-lg mb-4">
-              <LazyImage src={pair.portrait} alt={`Testimonial ${index + 1}`} />
+            <div className="relative w-full h-auto max-w-xs max-h-80 overflow-hidden rounded-lg mb-4 group">
+              <img
+                src={pair.portrait}
+                alt={`Testimonial ${index + 1}`}
+                className="w-full h-auto object-cover rounded-lg"
+              />
+              {/* Play button overlay */}
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                <FaPlayCircle className="text-white text-5xl drop-shadow-lg" />
+              </div>
             </div>
-
-            <AudioPlayer
-              src={pair.audio}
-              onPlay={() => setActiveIndex(index)}
-              onPause={() => setActiveIndex(null)} /* Reset pulse on pause */
-              onEnded={() => setActiveIndex(null)}
-              showJumpControls={false}
-              showDownloadProgress={false}
-              showFilledVolume={false}
-              customAdditionalControls={[]} // Hide extra buttons
-              customVolumeControls={[]} // Hide volume control
-              autoPlayAfterSrcChange={false}
-              layout="stacked"
-              style={{
-                backgroundColor: "#111",
-
-                borderRadius: "12px",
-
-                color: "#fff",
-
-                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)", // subtle glow
-
-                padding: "8px",
-              }}
-            />
           </motion.div>
         ))}
       </div>
 
-      {/* Navigation buttons */}
-      {/* <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 flex gap-8 z-50">
-        <Link to="/slideshow/3">
-          <motion.button
-            className="bg-gray-700 hover:bg-gray-600 text-white py-3 px-8 rounded-full shadow-lg transition duration-300"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            ◀
-          </motion.button>
-        </Link>
+      {/* Modal */}
+      {selectedPair && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4">
+          <div className="bg-zinc-900 rounded-xl w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative shadow-2xl">
+            {/* ❌ Close Button */}
+            <button
+              onClick={() => setSelectedPair(null)}
+              className="absolute top-4 left-4 text-gray-400 hover:text-white text-2xl"
+            >
+              &times;
+            </button>
 
-        <Link to="/exhibitB">
-          <motion.button
-            className="bg-gray-700 hover:bg-gray-600 text-white py-3 px-8 rounded-full shadow-lg transition duration-300"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            ▶
-          </motion.button>
-        </Link>
-      </div> */}
+            {/* 🖼️ Left Section (Image + Audio) */}
+            <div className="p-6 flex flex-col items-center justify-center">
+              <img
+                src={selectedPair.portrait}
+                alt="Portrait"
+                className="w-full h-auto object-cover rounded-lg"
+              />
+              <AudioPlayer
+                src={selectedPair.audio}
+                autoPlay
+                showJumpControls={false}
+                showDownloadProgress={false}
+                showFilledVolume={false}
+                customAdditionalControls={[]}
+                customVolumeControls={[]}
+                layout="stacked"
+                style={{
+                  backgroundColor: "#111",
+                  borderRadius: "12px",
+                  color: "#fff",
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
+                  padding: "8px",
+                  width: "100%",
+                }}
+              />
+            </div>
+
+            {/* 📜 Right Section (Transcript + Toggle) */}
+            <div className="p-6 flex flex-col items-start gap-y-4">
+              <div className="flex justify-between items-center w-full">
+                <h3 className="text-xl font-semibold text-white">Transcript</h3>
+                <button
+                  onClick={() => setShowMyanmar(!showMyanmar)}
+                  className="text-sm px-3 py-1 bg-yellow-400 text-black rounded-full"
+                >
+                  {showMyanmar ? "Switch to English" : "Switch to Myanmar"}
+                </button>
+              </div>
+
+              <div className="text-gray-200 text-sm overflow-y-auto max-h-[500px] whitespace-pre-wrap w-full">
+                {showMyanmar
+                  ? selectedPair.transcriptMy
+                  : selectedPair.transcriptEn}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
