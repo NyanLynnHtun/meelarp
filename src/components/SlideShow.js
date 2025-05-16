@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
 
 const slides = [
-  { type: "text", title: "Do we have a case?", description: "We set out to bring the regime to justice; not for war crimes, but for decades of electricity blackouts. Through testimonies, satellite visuals, and printed records, this work presents evidence of a quiet crime against dignity. You are invited to witness, reflect, and decide as the jury. " },
+  { type: "text", title: "Do we have a case?", description: "We set out to bring the Myanmar regime to justice; not for war crimes, but for decades of electricity blackouts. Through testimonies, satellite visuals, and printed records, this work presents evidence of a quiet crime against dignity. You are invited to witness, reflect, and decide as the jury. " },
   {
     type: "openingVideo",
     video:
@@ -122,6 +122,19 @@ function Slideshow() {
           <div className="text-slide">
             <h1 className="text-white text-base text-lg">{slide.title}</h1>
             {slide.description && <p className="text-gray-400 text-sm mt-1">{slide.description}</p>}
+            {currentSlide < slides.length - 1 && (
+              <motion.button
+                onClick={nextSlide}
+                className="bg-transparent mt-5 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                aria-label="Next slide"
+              >
+                {currentSlide === 0 ? "Start →" : "Next →"}
+              </motion.button>
+            )}
           </div>
         );
 
@@ -280,7 +293,7 @@ function Slideshow() {
           ))}
         </div>
 
-        {currentSlide < slides.length - 1 && (
+        {currentSlide > 0 && currentSlide <= slides.length - 1 && ( // hide button at first slide..
           <motion.button
             onClick={nextSlide}
             className="bg-transparent fixed bottom-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
@@ -290,7 +303,7 @@ function Slideshow() {
             transition={{ duration: 1.5, repeat: Infinity }}
             aria-label="Next slide"
           >
-            {currentSlide === 0 ? "Start →" : "Next →"}
+            Next →
           </motion.button>
         )}
       </div>
