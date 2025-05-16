@@ -290,7 +290,7 @@ function Slideshow() {
             transition={{ duration: 1.5, repeat: Infinity }}
             aria-label="Next slide"
           >
-            Next →
+            {currentSlide === 0 ? "Start →" : "Next →"}
           </motion.button>
         )}
       </div>
