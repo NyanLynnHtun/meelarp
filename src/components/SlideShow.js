@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
 
 const slides = [
-  { type: "text", title: "MEE LAR P", description: "" },
+  { type: "text", title: "Do we have a case?", description: "We set out to bring the regime to justice; not for war crimes, but for decades of electricity blackouts. Through testimonies, satellite visuals, and printed records, this work presents evidence of a quiet crime against dignity. You are invited to witness, reflect, and decide as the jury. " },
   {
     type: "openingVideo",
     video:
@@ -120,8 +120,8 @@ function Slideshow() {
       case "text":
         return (
           <div className="text-slide">
-            <h1 className="text-lg">{slide.title}</h1>
-            {slide.description && <p>{slide.description}</p>}
+            <h1 className="text-white text-base text-lg">{slide.title}</h1>
+            {slide.description && <p className="text-gray-400 text-sm mt-1">{slide.description}</p>}
           </div>
         );
 
