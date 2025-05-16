@@ -16,7 +16,8 @@
 
 /* Button base styling */
 .btn {
-  background-color: #3b3b98; /* Indigo base */
+  background-color: #3b3b98;
+  /* Indigo base */
   color: white;
   padding: 0.75rem 2rem;
   border-radius: 0.5rem;
@@ -42,9 +43,11 @@
   0% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.6;
   }
@@ -59,6 +62,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -88,7 +92,8 @@
 
 .rhap_current-time,
 .rhap_total-time {
-  color: #aaaaaad2 !important; /* or any color you want */
+  color: #aaaaaad2 !important;
+  /* or any color you want */
   font-weight: 500;
 }
 
@@ -100,13 +105,16 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 .video-text-slide {
   display: flex;
   flex-direction: column;
@@ -132,6 +140,7 @@ p {
   font-size: 1.2rem;
   color: #cccccc;
 }
+
 .video-wrapper {
   position: relative;
   width: 100%;
@@ -168,4 +177,3 @@ p {
 .play-button:hover {
   background: rgba(255, 255, 255, 0.4);
 }
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
@@ -6,8 +6,9 @@ import "./Slideshow.css";
 const slides = [
   { type: "text", title: "MEE LAR P", description: "" },
   {
-    type: "videoText",
-    video: "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Opening%20Statement.mp4",
+    type: "openingVideo",
+    video:
+      "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Opening%20Statement.mp4",
     title: "Lawyer Video - Opening Statement",
     description: "",
   },
@@ -18,31 +19,36 @@ const slides = [
         title: "Exhibit A: Testimonials",
         url: "/exhibitA",
         description: "Portraits + Audios",
-        image: "https://fakeimg.pl/200x200?text=Exhibit+A",
+        image:
+          "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20A_%20Testimonies.png",
       },
       {
         title: "Exhibit B: Social Media Survey Results",
         url: "/exhibitB",
         description: "",
-        image: "https://fakeimg.pl/200x200?text=Exhibit+B",
+        image:
+          "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20B_%20Feedback%20Wall.png",
       },
       {
         title: "Exhibit C: Video Compilations",
         url: "/exhibitC",
         description: "",
-        image: "https://fakeimg.pl/200x200?text=Exhibit+C",
+        image:
+          "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20C_Public%20Reaction.png",
       },
       {
         title: "Exhibit D: Digital Evidence",
         url: "/exhibitD",
         description: "",
-        image: "https://fakeimg.pl/200x200?text=Exhibit+D",
+        image:
+          "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20D_Satellite%20Imagery.png",
       },
       {
         title: "Exhibit E: Hard Data",
         url: "/exhibitE",
         description: "Documents",
-        image: "https://fakeimg.pl/200x200?text=Exhibit+E",
+        image:
+          "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20E_Evidence%20Archive.png",
       },
     ],
   },
@@ -52,6 +58,13 @@ const slides = [
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   },
   { type: "infographic", infographic: "https://fakeimg.pl/600x400" },
+  {
+    type: "closingVideo",
+    video:
+      "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Closing%20Statement.mp4",
+    title: "Lawyer Video - Closing Statement",
+    description: "",
+  }
 ];
 
 function Slideshow() {
@@ -59,7 +72,7 @@ function Slideshow() {
   const [currentSlide, setCurrentSlide] = useState(Number(slideNumber) || 0);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
-  
+
   const togglePlay = () => {
     const video = videoRef.current;
     if (video.paused) {
@@ -70,7 +83,7 @@ function Slideshow() {
       setIsPlaying(false);
     }
   };
-  
+
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
@@ -121,7 +134,7 @@ function Slideshow() {
       //     </div>
       //   );
 
-      case "videoText":
+      case "openingVideo":
         return (
           <div className="video-text-slide">
             <div className="video-wrapper">
@@ -141,43 +154,50 @@ function Slideshow() {
             <p>{slide.description}</p>
           </div>
         );
-        
+
       case "exhibits":
         return (
-          <div className="exhibits-slide">
-            <h1 className="text-lg">Exhibits</h1>
-            <ul className="exhibits-list">
-              {slide.exhibits.map((exhibit, index) => (
-                <li key={index} className="exhibit-item">
-                  <Link to={exhibit.url} className="exhibit-link">
-                    <div className="exhibit-content">
-                      <div className="exhibit-image-container">
-                        <img
-                          src={exhibit.image}
-                          alt={exhibit.title}
-                          className="exhibit-thumbnail"
-                        />
-                      </div>
-                      <div className="exhibit-text">
-                        <h2 className="exhibit-title">{exhibit.title}</h2>
-                        {exhibit.description && (
-                          <p className="exhibit-description">
-                            ({exhibit.description})
-                          </p>
-                        )}
-                      </div>
-                    </div>
+          <div className="exhibits-slide flex justify-center px-4 py-10">
+            <div className="max-w-6xl w-full">
+              <h1 className="text-2xl font-bold text-white text-center mb-12">
+                Exhibits
+              </h1>
+
+              <div className="flex flex-wrap justify-center gap-x-16 gap-y-16">
+                {slide.exhibits.map((exhibit, index) => (
+                  <Link
+                    to={exhibit.url}
+                    key={index}
+                    className="flex flex-col items-center text-center w-48 hover:scale-105 transition-transform"
+                  >
+                    <img
+                      src={exhibit.image}
+                      alt={exhibit.title}
+                      className="w-52 h-52 object-contain mb-4"
+                    />
+                    <h2 className="text-white text-base font-medium">
+                      {exhibit.title}
+                    </h2>
+                    {exhibit.description && (
+                      <p className="text-gray-400 text-sm mt-1">
+                        {exhibit.description}
+                      </p>
+                    )}
                   </Link>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </div>
+            </div>
           </div>
         );
 
       case "audio":
         return (
           <div className="audio-slide">
-            <img src={slide.userImage} alt="User" className="audio-user-image" />
+            <img
+              src={slide.userImage}
+              alt="User"
+              className="audio-user-image"
+            />
             <audio controls src={slide.audioUrl} className="audio-player" />
           </div>
         );
@@ -185,10 +205,34 @@ function Slideshow() {
       case "infographic":
         return (
           <div className="infographic-slide">
-            <img src={slide.infographic} alt="Infographic" className="infographic-image" />
+            <img
+              src={slide.infographic}
+              alt="Infographic"
+              className="infographic-image"
+            />
           </div>
         );
 
+      case "closingVideo":
+        return (
+          <div className="video-text-slide">
+            <div className="video-wrapper">
+              <video
+                ref={videoRef}
+                src={slide.video}
+                className="slide-video"
+                onClick={togglePlay}
+              />
+              {!isPlaying && (
+                <button className="play-button" onClick={togglePlay}>
+                  ▶
+                </button>
+              )}
+            </div>
+            <h1 className="text-lg">{slide.title}</h1>
+            <p>{slide.description}</p>
+          </div>
+        );
       default:
         return null;
     }
