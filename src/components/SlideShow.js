@@ -23,28 +23,28 @@ const slides = [
           "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20A_%20Testimonies.png",
       },
       {
-        title: "Exhibit B: Social Media Survey Results",
+        title: "Exhibit B: Feedback Wall",
         url: "/exhibitB",
         description: "",
         image:
           "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20B_%20Feedback%20Wall.png",
       },
       {
-        title: "Exhibit C: Video Compilations",
+        title: "Exhibit C: Public Reaction",
         url: "/exhibitC",
         description: "",
         image:
           "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20C_Public%20Reaction.png",
       },
       {
-        title: "Exhibit D: Digital Evidence",
+        title: "Exhibit D: Satellite Imagery",
         url: "/exhibitD",
         description: "",
         image:
           "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/icons/Exhibit%20D_Satellite%20Imagery.png",
       },
       {
-        title: "Exhibit E: Hard Data",
+        title: "Exhibit E: Evidence Archive",
         url: "/exhibitE",
         description: "Documents",
         image:
@@ -53,13 +53,21 @@ const slides = [
     ],
   },
   {
-    type: "audio",
-    userImage: "https://fakeimg.pl/150",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  },
-  { type: "infographic", infographic: "https://fakeimg.pl/600x400" },
-  {
     type: "closingVideo",
+    video:
+      "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Closing%20Statement.mp4",
+    title: "Lawyer Video - Closing Statement",
+    description: "",
+  },
+  {
+    type: "haveCase",
+    video:
+      "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Closing%20Statement.mp4",
+    title: "Lawyer Video - Closing Statement",
+    description: "",
+  },
+  {
+    type: "credit",
     video:
       "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Closing%20Statement.mp4",
     title: "Lawyer Video - Closing Statement",
@@ -70,7 +78,7 @@ const slides = [
 function Slideshow() {
   const { slideNumber } = useParams(); // Access the slide number from the URL
   const [currentSlide, setCurrentSlide] = useState(Number(slideNumber) || 0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef(null);
 
   const togglePlay = () => {
@@ -120,12 +128,12 @@ function Slideshow() {
       case "text":
         return (
           <div className="text-slide">
-            <h1 className="text-white text-base text-lg">{slide.title}</h1>
+            <h1 className="text-white text-base text-lg title-font">{slide.title}</h1>
             {slide.description && <p className="text-gray-400 text-sm mt-1">{slide.description}</p>}
             {currentSlide < slides.length - 1 && (
               <motion.button
                 onClick={nextSlide}
-                className="bg-transparent mt-5 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
+                className="bg-transparent mt-5 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{ y: [0, -10, 0] }}
@@ -152,6 +160,7 @@ function Slideshow() {
           <div className="video-text-slide">
             <div className="video-wrapper">
               <video
+                autoPlay
                 ref={videoRef}
                 src={slide.video}
                 className="slide-video"
@@ -163,8 +172,8 @@ function Slideshow() {
                 </button>
               )}
             </div>
-            <h1 className="text-lg">{slide.title}</h1>
-            <p>{slide.description}</p>
+            {/* <h1 className="text-lg">{slide.title}</h1>
+            <p>{slide.description}</p> */}
           </div>
         );
 
@@ -172,9 +181,9 @@ function Slideshow() {
         return (
           <div className="exhibits-slide flex justify-center px-4 py-10">
             <div className="max-w-6xl w-full">
-              <h1 className="text-2xl font-bold text-white text-center mb-12">
+              {/* <h1 className="text-2xl font-bold text-white text-center mb-12 title-font">
                 Exhibits
-              </h1>
+              </h1> */}
 
               <div className="flex flex-wrap justify-center gap-x-16 gap-y-16">
                 {slide.exhibits.map((exhibit, index) => (
@@ -188,14 +197,14 @@ function Slideshow() {
                       alt={exhibit.title}
                       className="w-52 h-52 object-contain mb-4"
                     />
-                    <h2 className="text-white text-base font-medium">
+                    <h2 className="text-white text-base font-medium title-font">
                       {exhibit.title}
                     </h2>
-                    {exhibit.description && (
+                    {/* {exhibit.description && (
                       <p className="text-gray-400 text-sm mt-1">
                         {exhibit.description}
                       </p>
-                    )}
+                    )} */}
                   </Link>
                 ))}
               </div>
@@ -231,6 +240,7 @@ function Slideshow() {
           <div className="video-text-slide">
             <div className="video-wrapper">
               <video
+                autoPlay
                 ref={videoRef}
                 src={slide.video}
                 className="slide-video"
@@ -242,8 +252,8 @@ function Slideshow() {
                 </button>
               )}
             </div>
-            <h1 className="text-lg">{slide.title}</h1>
-            <p>{slide.description}</p>
+            {/* <h1 className="text-lg">{slide.title}</h1>
+            <p>{slide.description}</p> */}
           </div>
         );
       default:
@@ -293,10 +303,10 @@ function Slideshow() {
           ))}
         </div>
 
-        {currentSlide > 0 && currentSlide <= slides.length - 1 && ( // hide button at first slide..
+        {currentSlide > 0 && currentSlide < slides.length - 1 && ( // hide button at first slide..
           <motion.button
             onClick={nextSlide}
-            className="bg-transparent fixed bottom-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
+            className="bg-transparent fixed bottom-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             animate={{ y: [0, -10, 0] }}

@@ -15,9 +15,9 @@ const ExhibitA = () => {
   return (
     <div className="p-20 space-y-12 px-6 py-16 min-h-screen bg-black text-white">
       {/* Transparent Header */}
-      <header className="mt-22 flex items-center justify-between absolute top-0 left-0 right-0 z-10 p-4 bg-transparent">
-        <h1 className="text-1xl font-bold text-white">
-          Exhibit A: Portraits and Audio Testimonials
+      <header className="mt-22 flex items-center justify-between absolute top-0 left-0 right-0 z-10 p-4 bg-transparent title-font">
+        <h1 className="text-1xl font-bold text-white ">
+          Exhibit A: Testimonies
         </h1>
         <div className="flex gap-8">
           <Link to="/slideshow/3">
@@ -42,31 +42,33 @@ const ExhibitA = () => {
       </header>
 
       {/* Exhibition content */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10 items-center justify-center">
-        {portraitAudioPairs.map((pair, index) => (
-          <motion.div
-            key={index}
-            className="flex flex-col items-center bg-transparent p-4 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => {
-              setSelectedPair(pair);
-              setShowMyanmar(true); // reset to MM by default
-            }}
-          >
-            <div className="relative w-full h-auto max-w-xs max-h-80 overflow-hidden rounded-lg mb-4 group">
-              <img
-                src={pair.portrait}
-                alt={`Testimonial ${index + 1}`}
-                className="w-full h-auto object-cover rounded-lg"
-              />
-              {/* Play button overlay */}
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                <FaPlayCircle className="text-white text-5xl drop-shadow-lg" />
+      <div className="w-full flex justify-center">
+        <div className="flex flex-wrap justify-center gap-x-16 gap-y-16">
+          {portraitAudioPairs.map((pair, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col items-center justify-center bg-transparent p-4 cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => {
+                setSelectedPair(pair);
+                setShowMyanmar(true); // reset to MM by default
+              }}
+            >
+              <div className="relative w-full h-auto max-w-xs max-h-80 overflow-hidden rounded-lg mb-4 group">
+                <img
+                  src={pair.portrait}
+                  alt={`Testimonial ${index + 1}`}
+                  className="w-full h-auto object-cover rounded-lg"
+                />
+                {/* Play button overlay */}
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                  <FaPlayCircle className="text-white text-5xl drop-shadow-lg" />
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Modal */}
@@ -116,14 +118,27 @@ const ExhibitA = () => {
                   onClick={() => setShowMyanmar(!showMyanmar)}
                   className="text-sm px-3 py-1 bg-yellow-400 text-black rounded-full"
                 >
-                  {showMyanmar ? "Switch to English" : "Switch to Myanmar"}
+                  {showMyanmar ? "Switch to English" : "Switch to Burmese"}
                 </button>
               </div>
 
               <div className="text-gray-200 text-sm overflow-y-auto max-h-[500px] whitespace-pre-wrap w-full">
-                {showMyanmar
+                {(showMyanmar
                   ? selectedPair.transcriptMy
-                  : selectedPair.transcriptEn}
+                  : selectedPair.transcriptEn
+                )
+                  // First, split paragraphs (double newline)
+                  .split(/\n\s*\n/)
+                  .map((para, idx) => (
+                    <h3 key={idx} style={{ marginBottom: "0.9em" }}>
+                      {para.split("\n").map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i !== para.split("\n").length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
+                    </h3>
+                  ))}
               </div>
             </div>
           </div>
