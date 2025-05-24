@@ -7,7 +7,7 @@
 /* Bulb wire: full height from top */
 .bulb-wire {
   width: 6px;
-  height: 220px;
+  height: 100px;
   background: #333;
   position: absolute;
   left: 50%;
@@ -31,7 +31,7 @@
 /* Bulb itself, placed at wire bottom */
 .bulb {
   position: absolute;
-  top: 220px; /* Must match wire height */
+  top: 100px; /* Must match wire height */
   left: 50%;
   transform: translateX(-50%);
   width: 64px;
@@ -67,7 +67,7 @@
 
 /* Controls under bulb */
 .controls-area {
-  margin-top: 40px; /* Space below bulb */
+  margin-top: 10px; /* Space below bulb */
   display: flex;
   flex-direction: row;
   align-items: center;

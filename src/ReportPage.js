@@ -128,8 +128,8 @@ export default function ReportPage() {
       </header>
 
       {/* Bulb scene */}
-      <div className="flex flex-col items-center justify-center w-full mt-24 mb-10 z-10">
-        <div className="bulb-scene" style={{ marginTop: "30px" }}>
+      <div className="flex flex-col w-full mt-24 mb-10 z-10">
+        <div className="bulb-scene" style={{ marginTop: "1px" }}>
           <div className="bulb-wire"></div>
           <div className={`bulb${isOn ? "" : " off"}`}>
             <div className="bulb-base"></div>
@@ -166,7 +166,7 @@ export default function ReportPage() {
       </div>
 
       {/* Reaction Bar */}
-      <div
+      {/* <div
         className="relative flex flex-col items-center"
         style={{ minHeight: 70 }}
       >
@@ -182,7 +182,7 @@ export default function ReportPage() {
             </button>
           ))}
         </div>
-        {/* Floating reactions (animated) */}
+       
         <div
           style={{
             position: "absolute",
@@ -202,7 +202,7 @@ export default function ReportPage() {
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Status Panel */}
       <div className="last-report absolute bottom-12 left-1/2 -translate-x-1/2 bg-black bg-opacity-50 px-8 py-5 rounded-2xl text-white text-center shadow-2xl w-[90vw] max-w-md z-30 border border-white/20">
