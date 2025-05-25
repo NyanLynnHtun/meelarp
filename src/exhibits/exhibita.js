@@ -73,23 +73,28 @@ const ExhibitA = () => {
 
       {/* Modal */}
       {selectedPair && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-4">
-          <div className="bg-zinc-900 rounded-xl w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 px-2 py-4 sm:px-4 sm:py-8 overflow-y-auto">
+          <div
+            className="relative bg-zinc-900 rounded-xl w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 shadow-2xl mx-auto"
+            style={{ maxHeight: "90vh" }}
+          >
             {/* ❌ Close Button */}
             <button
               onClick={() => setSelectedPair(null)}
-              className="absolute top-4 left-4 text-gray-400 hover:text-white text-2xl"
+              className="absolute top-2 right-3 md:top-4 md:left-4 text-gray-400 hover:text-white text-2xl z-10"
             >
               &times;
             </button>
 
-            {/* 🖼️ Left Section (Image + Audio) */}
-            <div className="p-6 flex flex-col items-center justify-center">
-              <img
-                src={selectedPair.portrait}
-                alt="Portrait"
-                className="w-full h-auto object-cover rounded-lg"
-              />
+            {/* Left Section (Image + Audio) */}
+            <div className="p-4 sm:p-6 flex flex-col items-center justify-start">
+              <div className="w-32 h-32 sm:w-48 sm:h-60 md:w-64 md:h-80 flex-shrink-0">
+                <img
+                  src={selectedPair.portrait}
+                  alt="Portrait"
+                  className="w-full h-full object-cover object-top rounded-lg"
+                />
+              </div>
               <AudioPlayer
                 src={selectedPair.audio}
                 autoPlay
@@ -106,13 +111,16 @@ const ExhibitA = () => {
                   boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
                   padding: "8px",
                   width: "100%",
+                  maxWidth: 320,
+                  marginTop: 16,
                 }}
               />
             </div>
 
-            {/* 📜 Right Section (Transcript + Toggle) */}
-            <div className="p-6 flex flex-col items-start gap-y-4">
-              <div className="flex justify-between items-center w-full">
+            {/* Right Section (Transcript) */}
+            <div className="flex flex-col h-full p-4 sm:p-6">
+              {/* Fixed header with title and toggle */}
+              <div className="flex justify-between items-center w-full flex-shrink-0 mb-2">
                 <h3 className="text-xl font-semibold text-white">Transcript</h3>
                 <button
                   onClick={() => setShowMyanmar(!showMyanmar)}
@@ -121,13 +129,12 @@ const ExhibitA = () => {
                   {showMyanmar ? "Switch to English" : "Switch to Burmese"}
                 </button>
               </div>
-
-              <div className="text-gray-200 text-sm overflow-y-auto max-h-[500px] whitespace-pre-wrap w-full">
+              {/* Only the text is scrollable */}
+              <div className="text-gray-200 text-sm overflow-y-auto w-full flex-1 whitespace-pre-wrap min-h-0 max-h-[50vh] sm:max-h-[65vh]">
                 {(showMyanmar
                   ? selectedPair.transcriptMy
                   : selectedPair.transcriptEn
                 )
-                  // First, split paragraphs (double newline)
                   .split(/\n\s*\n/)
                   .map((para, idx) => (
                     <h3 key={idx} style={{ marginBottom: "0.9em" }}>
