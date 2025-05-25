@@ -4,20 +4,23 @@
 .slideshow-container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: black;
   color: white;
-  overflow: hidden;
+  /* Center children with flexbox */
+  display: flex;
+  align-items: center;    /* vertical center */
+  justify-content: center;
+  flex-direction: column; 
 }
 
 /* Slide content */
 .slide-content {
-  position: absolute;
+  width: 100%;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   z-index: 10;
 }
 
