@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Header from "../exhibits/header";
 
 const ExhibitE = () => {
   const portraitAudioPairs = [
@@ -15,28 +16,14 @@ const ExhibitE = () => {
   ];
 
   return (
-    <div className="space-y-8 p-6">
-      <h1 className="text-3xl font-bold text-center">Exhibit E: Testimonials (Portraits + Audios)</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {portraitAudioPairs.map((pair, index) => (
-          <motion.div
-            key={index}
-            className="bg-gray-800 p-6 rounded-lg shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img
-              src={pair.portrait}
-              alt={`Testimonial ${index + 1}`}
-              className="w-full h-auto rounded-lg mb-4"
-            />
-            <audio controls className="w-full">
-              <source src={pair.audio} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </motion.div>
-        ))}
-      </div>
+    <div className="p-20 space-y-12 px-6 py-16 min-h-screen bg-black text-white">
+      <Header
+        title="Exhibit E: Evidence Archive"
+        prevPath="/exhibitD"
+        prevLabel="← Previous"
+        nextPath="/slideshow/3"
+        nextLabel="Next →"
+      />
     </div>
   );
 };

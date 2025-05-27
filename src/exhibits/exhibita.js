@@ -17,7 +17,7 @@ const ExhibitA = () => {
       {/* Transparent Header */}
       <header className="mt-22 flex items-center justify-between absolute top-0 left-0 right-0 z-10 p-4 bg-transparent title-font">
         <h1 className="text-1xl font-bold text-white ">
-          Exhibit A: Testimonies
+          Exhibit A: Testimonials
         </h1>
         <div className="flex gap-8">
           <Link to="/slideshow/3">
