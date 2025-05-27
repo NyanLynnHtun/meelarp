@@ -81,7 +81,7 @@ const ExhibitA = () => {
             {/* ❌ Close Button */}
             <button
               onClick={() => setSelectedPair(null)}
-              className="absolute top-2 right-3 md:top-4 md:left-4 text-gray-400 hover:text-white text-2xl z-10"
+              className="absolute top-2 left-3 md:top-4 md:left-5 text-gray-400 hover:text-white text-2xl z-10"
             >
               &times;
             </button>

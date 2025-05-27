@@ -1,41 +1,42 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ExhibitB = () => {
-  const portraitAudioPairs = [
-    {
-      portrait: 'https://fakeimg.pl/200x200?text=Portrait+1',
-      audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    },
-    {
-      portrait: 'https://fakeimg.pl/200x200?text=Portrait+2',
-      audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    },
-    // Add more pairs as needed
-  ];
-
   return (
-    <div className="space-y-8 p-6">
-      <h1 className="text-3xl font-bold text-center">Exhibit B: Testimonials (Portraits + Audios)</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {portraitAudioPairs.map((pair, index) => (
-          <motion.div
-            key={index}
-            className="bg-gray-800 p-6 rounded-lg shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img
-              src={pair.portrait}
-              alt={`Testimonial ${index + 1}`}
-              className="w-full h-auto rounded-lg mb-4"
-            />
-            <audio controls className="w-full">
-              <source src={pair.audio} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          </motion.div>
-        ))}
+    <div className="p-20 space-y-12 px-6 py-16 min-h-screen bg-black text-white">
+      {/* Transparent Header */}
+      <header className="mt-22 flex items-center justify-between absolute top-0 left-0 right-0 z-10 p-4 bg-transparent title-font">
+        <h1 className="text-1xl font-bold text-white ">
+          Exhibit B: Feedback Wall
+        </h1>
+        <div className="flex gap-8">
+          <Link to="/slideshow/3">
+            <motion.button
+              className="bg-transparent top-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Back to Exhibits
+            </motion.button>
+          </Link>
+          <Link to="/exhibitB">
+            <motion.button
+              className="bg-transparent top-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Next →
+            </motion.button>
+          </Link>
+        </div>
+      </header>
+
+      {/* Exhibition content */}
+      <div className="w-full flex justify-center">
+        <div className="flex flex-wrap justify-center gap-x-16 gap-y-16">
+          
+        </div>
       </div>
     </div>
   );
