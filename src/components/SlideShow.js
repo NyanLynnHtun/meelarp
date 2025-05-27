@@ -4,7 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
 
 const slides = [
-  { type: "text", title: "Do we have a case?", description: "We set out to bring the Myanmar regime to justice; not for war crimes, but for decades of electricity blackouts. Through testimonies, satellite visuals, and printed records, this work presents evidence of a quiet crime against dignity. You are invited to witness, reflect, and decide as the jury. " },
+  {
+    type: "text",
+    title: "Do we have a case?",
+    description:
+      "We set out to bring the Myanmar regime to justice; not for war crimes, but for decades of electricity blackouts. Through testimonies, satellite visuals, and printed records, this work presents evidence of a quiet crime against dignity. You are invited to witness, reflect, and decide as the jury. ",
+  },
   {
     type: "openingVideo",
     video:
@@ -72,7 +77,7 @@ const slides = [
       "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Closing%20Statement.mp4",
     title: "Lawyer Video - Closing Statement",
     description: "",
-  }
+  },
 ];
 
 function Slideshow() {
@@ -128,8 +133,12 @@ function Slideshow() {
       case "text":
         return (
           <div className="text-slide">
-            <h1 className="text-white text-base text-lg title-font">{slide.title}</h1>
-            {slide.description && <p className="text-gray-400 text-sm mt-1">{slide.description}</p>}
+            <h1 className="text-white text-base text-lg title-font">
+              {slide.title}
+            </h1>
+            {slide.description && (
+              <p className="text-gray-400 text-sm mt-1">{slide.description}</p>
+            )}
             {currentSlide < slides.length - 1 && (
               <motion.button
                 onClick={nextSlide}
@@ -145,15 +154,6 @@ function Slideshow() {
             )}
           </div>
         );
-
-      // case "imageText":
-      //   return (
-      //     <div className="image-text-slide">
-      //       <img src={slide.image} alt={slide.title} className="slide-image" />
-      //       <h1 className="text-lg">{slide.title}</h1>
-      //       <p>{slide.description}</p>
-      //     </div>
-      //   );
 
       case "openingVideo":
         return (
@@ -256,6 +256,82 @@ function Slideshow() {
             <p>{slide.description}</p> */}
           </div>
         );
+
+      case "hasCase":
+        return <div></div>;
+
+      case "credit":
+        return (
+          <div className="credit-slide flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
+            <motion.h1
+              className="text-2xl sm:text-3xl font-bold text-white mb-4 title-font"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              Credits & Appreciation
+            </motion.h1>
+            <motion.p
+              className="text-base sm:text-lg text-gray-200 mb-6 max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+            >
+              This work was originally created as a Master Project in Digital
+              Media at HfK Bremen by Zwe Oak Soe, with contributions from
+              individuals residing in refugee camps along the Thai-Myanmar
+              border.
+              <br />
+              <br />
+              <span className="font-semibold text-white">
+                Special thanks to:
+              </span>
+            </motion.p>
+
+            <motion.ul
+              className="text-white text-base sm:text-lg mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.7 }}
+            >
+              <li className="mb-2">
+                <span className="font-bold">L Lone</span>
+              </li>
+              <li className="mb-2">
+                <span className="font-bold">Khine Zaw</span>
+              </li>
+              <li className="mb-2">
+                <span className="font-bold">Thar Zaw</span>
+              </li>
+              <li className="mb-2">
+                <span className="font-bold">Wi</span>
+              </li>
+              <li className="mb-2">
+                <span className="font-bold">Dustin</span>
+              </li>
+              {/* Add more roles as needed */}
+            </motion.ul>
+            <motion.p
+              className="text-base text-gray-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.7 }}
+            >
+              <span className="text-gray-400 text-sm mb-1">
+                More Information at:
+              </span>
+              <a
+                href="mailto:zoaksoe@hfk-bremen.de"
+                className="text-gray-300 text-md p-1 font-semibold underline hover:text-gray-100 transition"
+              >
+                zoaksoe@hfk-bremen.de
+              </a>
+              <br />
+              <span className="italic">Website design by Dustin 🚀</span>
+            </motion.p>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -280,17 +356,6 @@ function Slideshow() {
 
       {/* Navigation Controls */}
       <div className="navigation-controls">
-        {/* <motion.button
-          onClick={previousSlide}
-          disabled={currentSlide === 0}
-          className="nav-button prev-button"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Previous slide"
-        >
-          ← Previous
-        </motion.button> */}
-
         {/* Progress Indicators */}
         <div className="progress-dots">
           {slides.map((_, index) => (
@@ -303,19 +368,20 @@ function Slideshow() {
           ))}
         </div>
 
-        {currentSlide > 0 && currentSlide < slides.length - 1 && ( // hide button at first slide..
-          <motion.button
-            onClick={nextSlide}
-            className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            aria-label="Next slide"
-          >
-            Next →
-          </motion.button>
-        )}
+        {currentSlide > 0 &&
+          currentSlide < slides.length - 1 && ( // hide button at first slide..
+            <motion.button
+              onClick={nextSlide}
+              className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              aria-label="Next slide"
+            >
+              Next →
+            </motion.button>
+          )}
       </div>
     </div>
   );
