@@ -1,7 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "../exhibits/header";
-
 
 const satelliteImages = [
   {
@@ -135,9 +134,15 @@ const satelliteImages = [
 ];
 
 const ExhibitD = () => {
+  // Lightbox state
+  const [lightbox, setLightbox] = useState({
+    open: false,
+    src: "",
+    caption: "",
+  });
+
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Reusable Header */}
       <Header
         title="Exhibit D: Satellite Imagery"
         prevPath="/exhibitC"
@@ -146,7 +151,6 @@ const ExhibitD = () => {
         nextLabel="Next →"
       />
 
-      {/* Content */}
       <motion.div
         className="flex flex-col items-center justify-center pt-32 pb-16 px-4"
         initial={{ opacity: 0 }}
@@ -156,7 +160,7 @@ const ExhibitD = () => {
         <h1 className="text-2xl md:text-3xl font-bold mb-8 tracking-wide title-font">
           Evidence from Space
         </h1>
-        {/* <p className="text-gray-300 max-w-2xl mb-12 text-center text-base md:text-lg font-mono">
+        {/* <p className="text-gray-300 max-w-2xl mb-12 text-center text-base md:text-lg">
           Power outages and city-wide blackouts visible from space. Satellite imagery was used to document the change in night-time lights over Myanmar since the coup. Scroll through the images to see the evidence.
         </p> */}
 
@@ -164,15 +168,18 @@ const ExhibitD = () => {
           {satelliteImages.map((img, i) => (
             <motion.div
               key={i}
-              className="bg-white bg-opacity-5 rounded-xl p-4 flex flex-col items-center shadow-md"
+              className="bg-white bg-opacity-5 rounded-xl p-4 flex flex-col items-center shadow-md cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * i, duration: 0.7 }}
+              onClick={() =>
+                setLightbox({ open: true, src: img.src, caption: img.caption })
+              }
             >
               <img
                 src={img.src}
                 alt={img.caption}
-                className="w-full h-72 object-contain rounded mb-3 border border-white border-opacity-10"
+                className="w-full h-72 object-contain rounded mb-3 border border-white border-opacity-10 transition duration-150 hover:scale-105"
                 style={{ background: "#222" }}
               />
               <span className="text-xs text-gray-400">{img.caption}</span>
@@ -180,6 +187,51 @@ const ExhibitD = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* Lightbox Overlay */}
+      <AnimatePresence>
+  {lightbox.open && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-95"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setLightbox({ open: false, src: "", caption: "" })}
+      style={{ cursor: "zoom-out" }}
+    >
+      <div
+        className="relative flex flex-col items-center"
+        onClick={e => e.stopPropagation()}
+        style={{
+          maxWidth: "98vw",
+          maxHeight: "92vh",
+        }}
+      >
+        <img
+          src={lightbox.src}
+          alt={lightbox.caption}
+          className="rounded-2xl shadow-2xl border border-white bg-black"
+          style={{
+            width: "min(700px, 92vw)",
+            height: "min(520px, 75vh)",
+            objectFit: "contain",
+            imageRendering: "pixelated", // <- helps small GIFs scale up crisply
+            background: "#111",
+          }}
+        />
+        <span className="mt-5 text-base text-gray-200 text-center max-w-2xl px-4">{lightbox.caption}</span>
+        <button
+          className="absolute top-2 right-2 bg-black bg-opacity-60 text-white text-2xl rounded-full px-4 py-1.5 hover:bg-opacity-90 transition font-bold"
+          onClick={() => setLightbox({ open: false, src: "", caption: "" })}
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };
