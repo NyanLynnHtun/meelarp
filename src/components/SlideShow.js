@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Slideshow.css";
+import HasCaseSlide from "./HasCaseSlide";
 
 const slides = [
   {
@@ -257,8 +258,12 @@ function Slideshow() {
           </div>
         );
 
-      case "hasCase":
-        return <div></div>;
+      case "haveCase":
+        return (
+          <HasCaseSlide
+            goToCreditSlide={() => setCurrentSlide(slides.length - 1)}
+          />
+        );
 
       case "credit":
         return (
