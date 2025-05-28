@@ -374,7 +374,7 @@ function Slideshow() {
         </div>
 
         {currentSlide > 0 &&
-          currentSlide < slides.length - 1 && ( // hide button at first slide..
+          currentSlide < slides.length - 2 && ( // hide button at first slide..
             <motion.button
               onClick={nextSlide}
               className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
@@ -387,6 +387,21 @@ function Slideshow() {
               Next →
             </motion.button>
           )}
+
+        {/* Restart button: only show at last slide */}
+        {currentSlide === slides.length - 1 && (
+          <motion.button
+            onClick={() => setCurrentSlide(0)}
+            className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            aria-label="Restart slideshow"
+          >
+            Restart ↻
+          </motion.button>
+        )}
       </div>
     </div>
   );

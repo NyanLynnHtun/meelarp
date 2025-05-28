@@ -61,18 +61,34 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
   const submitVote = async (vote) => {
     if (hasVoted) return;
     setSubmitting(true);
+
+    // Optimistic UI update
+    setVoteStats((prev) => {
+      const yes = prev.yes + (vote === "yes" ? 1 : 0);
+      const no = prev.no + (vote === "no" ? 1 : 0);
+      return { yes, no, total: prev.total + 1 };
+    });
+    setHasVoted(true);
+
+    // Backend
     const { error } = await supabase.from("case_votes").insert([{ vote }]);
     setSubmitting(false);
-    if (!error) {
-      setHasVoted(true);
-      setTimeout(goToCreditSlide, 900);
-    } else {
+
+    // Optionally re-fetch stats (uncomment if needed)
+    // fetchStats();
+
+    // Wait longer before navigating
+    setTimeout(goToCreditSlide, 2000);
+
+    if (error) {
       setErrorMsg("Error submitting your vote. Try again.");
     }
   };
 
   const yesPercent =
-    voteStats.total > 0 ? Math.round((voteStats.yes / voteStats.total) * 100) : 0;
+    voteStats.total > 0
+      ? Math.round((voteStats.yes / voteStats.total) * 100)
+      : 0;
   const noPercent = 100 - yesPercent;
 
   return (
@@ -87,16 +103,14 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
         Do we have a case?
       </motion.h2>
 
-      {errorMsg && (
-        <div className="text-red-400 mb-4">{errorMsg}</div>
-      )}
+      {errorMsg && <div className="text-red-400 mb-4">{errorMsg}</div>}
 
       {loading ? (
         <div className="text-gray-500 text-lg my-12">Loading results...</div>
       ) : !hasVoted ? (
         <div className="flex flex-row gap-10 mb-12">
           <motion.button
-            className="title-font border border-white text-white font-semibold py-5 px-14 rounded-full text-2xl shadow-none transition-all duration-150 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white"
+            className="title-font border border-white text-white font-semibold py-5 px-14 rounded-full text-2xl shadow-none transition-all duration-150 hover:bg-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => submitVote("yes")}
@@ -106,7 +120,7 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
             Yes
           </motion.button>
           <motion.button
-            className="title-font border border-white text-white font-semibold py-5 px-14 rounded-full text-2xl shadow-none transition-all duration-150 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white"
+            className="title-font border border-white text-white font-semibold py-5 px-14 rounded-full text-2xl shadow-none transition-all duration-150 hover:bg-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => submitVote("no")}
@@ -171,7 +185,8 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
             </div>
           </div>
           <div className="mt-4 text-gray-400 text-sm tracking-wide font-mono">
-            <b className="text-white">{voteStats.total}</b> response{voteStats.total !== 1 && "s"} submitted
+            <b className="text-white">{voteStats.total}</b> response
+            {voteStats.total !== 1 && "s"} submitted
           </div>
         </div>
       )}
