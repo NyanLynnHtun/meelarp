@@ -22,7 +22,7 @@ const slides = [
     type: "exhibits",
     exhibits: [
       {
-        title: "Exhibit A: Testimonials",
+        title: "Exhibit A: Testimonies",
         url: "/exhibitA",
         description: "Portraits + Audios",
         image:
@@ -198,14 +198,14 @@ function Slideshow() {
                       alt={exhibit.title}
                       className="w-52 h-52 object-contain mb-4"
                     />
-                    <h2 className="text-white text-base font-medium title-font">
+                    {/* <h2 className="text-white text-base font-large title-font">
                       {exhibit.title}
-                    </h2>
-                    {/* {exhibit.description && (
+                    </h2> */}
+                    {exhibit.title && (
                       <p className="text-gray-400 text-sm mt-1">
-                        {exhibit.description}
+                        {exhibit.title}
                       </p>
-                    )} */}
+                    )}
                   </Link>
                 ))}
               </div>
@@ -312,6 +312,9 @@ function Slideshow() {
                 <span className="font-bold">Wi</span>
               </li>
               <li className="mb-2">
+                <span className="font-bold">Artist K</span>
+              </li>
+              <li className="mb-2">
                 <span className="font-bold">Dustin</span>
               </li>
               {/* Add more roles as needed */}
@@ -333,6 +336,20 @@ function Slideshow() {
               </a>
               <br />
               <span className="italic">Website design by Dustin 🚀</span>
+              <br />
+            {currentSlide === slides.length - 1 && (
+              <motion.button
+                onClick={() => setCurrentSlide(0)}
+            className="bg-transparent mt-6 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            aria-label="Restart slideshow"
+              >
+                Restart ↻
+              </motion.button>
+            )}
             </motion.p>
           </div>
         );
@@ -374,7 +391,7 @@ function Slideshow() {
         </div>
 
         {currentSlide > 0 &&
-          currentSlide < slides.length - 2 && ( // hide button at first slide..
+          currentSlide < slides.length - 1 && ( // hide button at first slide..
             <motion.button
               onClick={nextSlide}
               className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
@@ -389,7 +406,7 @@ function Slideshow() {
           )}
 
         {/* Restart button: only show at last slide */}
-        {currentSlide === slides.length - 1 && (
+        {/* {currentSlide === slides.length - 1 && (
           <motion.button
             onClick={() => setCurrentSlide(0)}
             className="bg-transparent fixed bottom-3 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
@@ -401,7 +418,7 @@ function Slideshow() {
           >
             Restart ↻
           </motion.button>
-        )}
+        )} */}
       </div>
     </div>
   );

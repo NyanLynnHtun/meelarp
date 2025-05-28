@@ -78,7 +78,7 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
     // fetchStats();
 
     // Wait longer before navigating
-    setTimeout(goToCreditSlide, 2000);
+    //setTimeout(goToCreditSlide, 2000);
 
     if (error) {
       setErrorMsg("Error submitting your vote. Try again.");
