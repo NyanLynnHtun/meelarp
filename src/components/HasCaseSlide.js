@@ -84,7 +84,7 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
         transition={{ delay: 0.1, duration: 0.6 }}
         style={{ letterSpacing: ".04em" }}
       >
-        Do you have a case?
+        Do we have a case?
       </motion.h2>
 
       {errorMsg && (
