@@ -312,7 +312,9 @@ export default function ExhibitB() {
       {/* Main Content */}
       <div className="mx-auto max-w-7xl w-full pt-32 px-2 py-10 flex flex-col gap-10">
         {/* --- Infographics --- */}
+        <h2 className="title-font text-white/70">We conducted a Facebook survey, gathering responses from 426 people across Myanmar. Below are the summarized results.</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 shadow">
             <h2 className="mb-3 text-base font-bold tracking-wide uppercase text-white/80">
               Respondents by Region
@@ -364,6 +366,18 @@ export default function ExhibitB() {
             />
           </div>
         </div>
+        <section className="mt-12">
+          <div className="bg-white/5 rounded-2xl p-6 shadow">
+            <h2 className="mb-3 text-base font-bold tracking-wide uppercase text-white/70 title-font mb-6">
+              Scan the QR code to read the full discussion and comments.
+            </h2>
+            <img
+              src="https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/qr-B.png"
+              alt= "qr"
+              className="w-52 h-52 object-contain mb-4"
+            />
+          </div>
+        </section>
         {/* --- Blackout Memories --- */}
         <section className="mt-12">
           <BlackoutMemoriesCloud />
