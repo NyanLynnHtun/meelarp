@@ -133,17 +133,25 @@ function Slideshow() {
     switch (slide.type) {
       case "text":
         return (
-          <div className="text-slide">
-            <h1 className="text-white text-base text-lg title-font">
+          <div className="text-slide w-full max-w-2xl md:max-w-3xl xl:max-w-4xl bg-transparent mx-auto text-center">
+            <h1 className="text-white font-black text-2xl sm:text-3xl md:text-4xl xl:text-5xl mb-6 leading-tight title-font">
               {slide.title}
             </h1>
             {slide.description && (
-              <p className="text-gray-400 text-sm mt-1">{slide.description}</p>
+              <p className="text-gray-400 text-base sm:text-lg md:text-xl xl:text-2xl mb-6 leading-relaxed font-medium">
+                {slide.description}
+              </p>
             )}
             {currentSlide < slides.length - 1 && (
               <motion.button
                 onClick={nextSlide}
-                className="bg-transparent mt-5 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
+                className="
+                  bg-transparent mt-5 bg-gray-700 hover:bg-gray-900 text-white
+                  py-3 px-6 rounded-full shadow-lg transition z-20 title-font
+                  text-base sm:text-lg md:text-xl xl:text-2xl
+                  px-6 sm:px-8 md:px-12 xl:px-16
+                  py-3 sm:py-4 md:py-5 xl:py-6
+                "
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{ y: [0, -10, 0] }}
@@ -158,17 +166,29 @@ function Slideshow() {
 
       case "openingVideo":
         return (
-          <div className="video-text-slide">
-            <div className="video-wrapper">
+          <div className="video-text-slide flex items-center justify-center w-full h-full min-h-[60vh]">
+            <div className="video-wrapper w-full flex items-center justify-center">
               <video
                 autoPlay
                 ref={videoRef}
                 src={slide.video}
-                className="slide-video"
+                className="
+                  rounded-xl shadow-xl
+                  w-full max-w-3xl
+                  h-auto aspect-[2/2]
+                  bg-black
+                "
+                style={{
+                  // fallback for browsers that don't support aspect-ratio
+                  maxHeight: "70vh",
+                }}
                 onClick={togglePlay}
               />
               {!isPlaying && (
-                <button className="play-button" onClick={togglePlay}>
+                <button
+                  className="play-button absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl bg-black/50 text-white rounded-full p-4"
+                  onClick={togglePlay}
+                >
                   ▶
                 </button>
               )}
@@ -181,7 +201,7 @@ function Slideshow() {
       case "exhibits":
         return (
           <div className="exhibits-slide flex justify-center px-4 py-10">
-            <div className="max-w-6xl w-full">
+            <div className="max-w-8xl w-full">
               {/* <h1 className="text-2xl font-bold text-white text-center mb-12 title-font">
                 Exhibits
               </h1> */}
@@ -191,7 +211,7 @@ function Slideshow() {
                   <Link
                     to={exhibit.url}
                     key={index}
-                    className="flex flex-col items-center text-center w-48 hover:scale-105 transition-transform"
+                    className="flex flex-col items-center text-center w-52 hover:scale-105 transition-transform"
                   >
                     <img
                       src={exhibit.image}
@@ -238,17 +258,29 @@ function Slideshow() {
 
       case "closingVideo":
         return (
-          <div className="video-text-slide">
-            <div className="video-wrapper">
+          <div className="video-text-slide flex items-center justify-center w-full h-full min-h-[60vh]">
+            <div className="video-wrapper w-full flex items-center justify-center">
               <video
                 autoPlay
                 ref={videoRef}
                 src={slide.video}
-                className="slide-video"
+                className="
+                  rounded-xl shadow-xl
+                  w-full max-w-3xl
+                  h-auto aspect-[2/2]
+                  bg-black
+                "
+                style={{
+                  // fallback for browsers that don't support aspect-ratio
+                  maxHeight: "70vh",
+                }}
                 onClick={togglePlay}
               />
               {!isPlaying && (
-                <button className="play-button" onClick={togglePlay}>
+                <button
+                  className="play-button absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl bg-black/50 text-white rounded-full p-4"
+                  onClick={togglePlay}
+                >
                   ▶
                 </button>
               )}
@@ -257,7 +289,6 @@ function Slideshow() {
             <p>{slide.description}</p> */}
           </div>
         );
-
       case "haveCase":
         return (
           <HasCaseSlide
@@ -267,59 +298,49 @@ function Slideshow() {
 
       case "credit":
         return (
-          <div className="credit-slide flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
-            <motion.h1
-              className="text-2xl sm:text-3xl font-bold text-white mb-4 title-font"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-            >
+          <div className="text-slide w-full max-w-2xl md:max-w-3xl xl:max-w-4xl bg-transparent mx-auto text-center">
+            <h1 className="text-white font-black text-2xl sm:text-3xl md:text-4xl xl:text-5xl mb-6 leading-tight title-font">
               Credits & Appreciation
-            </motion.h1>
-            <motion.p
-              className="text-base sm:text-lg text-gray-200 mb-6 max-w-2xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-            >
-              This work was originally created as a Master Project in Digital
+            </h1>
+            <p className="text-gray-400 text-base sm:text-lg md:text-xl xl:text-2xl mb-6 leading-relaxed font-medium">
+              This work was originally created as a Master Project in Digital 
               Media at HfK Bremen by Zwe Oak Soe, with contributions from
-              individuals residing in refugee camps along the Thai-Myanmar
-              border.
-              <br />
-              <br />
-              <span className="font-semibold text-white">
+              individuals residing in refugee camps along the Thai-Myanmar border.
+            </p>
+            <p className="text-gray-400 text-base sm:text-lg md:text-xl xl:text-2xl mb-6 leading-relaxed font-medium">
+              <span className="font-semibold">
                 Special thanks to:
               </span>
-            </motion.p>
-
-            <motion.ul
-              className="text-white text-base sm:text-lg mb-8"
+              <br/>
+              <motion.ul
+              className="text-base sm:text-lg mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.7 }}
             >
               <li className="mb-2">
-                <span className="font-bold">L Lone</span>
+                <span className="font-semibold">L Lone</span>
               </li>
               <li className="mb-2">
-                <span className="font-bold">Khine Zaw</span>
+                <span className="font-semibold">Khine Zaw</span>
               </li>
               <li className="mb-2">
-                <span className="font-bold">Thar Zaw</span>
+                <span className="font-semibold">Thar Zaw</span>
               </li>
               <li className="mb-2">
-                <span className="font-bold">Wi</span>
+                <span className="font-semibold">Wi</span>
               </li>
               <li className="mb-2">
-                <span className="font-bold">Artist K</span>
+                <span className="font-semibold">Artist K</span>
               </li>
               <li className="mb-2">
-                <span className="font-bold">Dustin</span>
+                <span className="font-semibold">Dustin</span>
               </li>
               {/* Add more roles as needed */}
             </motion.ul>
-            <motion.p
+            </p>
+            
+             <motion.p
               className="text-base text-gray-400"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -337,22 +358,29 @@ function Slideshow() {
               <br />
               <span className="italic">Website design by Dustin 🚀</span>
               <br />
-            {currentSlide === slides.length - 1 && (
-              <motion.button
-                onClick={() => setCurrentSlide(0)}
-            className="bg-transparent mt-6 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20 title-font"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            aria-label="Restart slideshow"
-              >
-                Restart ↻
-              </motion.button>
-            )}
+              {currentSlide === slides.length - 1 && (
+                <motion.button
+                  onClick={() => setCurrentSlide(0)}
+                  className="
+                  bg-transparent mt-8 bg-gray-700 hover:bg-gray-900 text-white
+                  py-3 px-6 rounded-full shadow-lg transition z-20 title-font
+                  text-base sm:text-lg md:text-xl xl:text-2xl
+                  px-6 sm:px-8 md:px-12 xl:px-16
+                  py-3 sm:py-4 md:py-5 xl:py-6
+                "
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  aria-label="Restart slideshow"
+                >
+                  Restart ↻
+                </motion.button>
+              )}
             </motion.p>
           </div>
         );
+        
 
       default:
         return null;
@@ -361,7 +389,7 @@ function Slideshow() {
 
   return (
     <div className="slideshow-container">
-      <div className="slide-content">
+      <div className="slide-content slide-content flex items-center justify-center min-h-[68vh] sm:min-h-[66vh] md:min-h-[72vh] xl:min-h-[78vh] px-2">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
