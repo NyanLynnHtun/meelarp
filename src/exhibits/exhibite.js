@@ -39,6 +39,13 @@ const evidenceFiles = [
     preview: "",
     description: "Verbatim records of interviews conducted with individuals from diverse backgrounds, capturing personal experiences and emotional narratives about life without stable electricity.",
   },
+  {
+    title: "Raw Survey Data",
+    fileUrl: "https://mnjbeotqfpzajrksfgcf.supabase.co/storage/v1/object/public/meelarp-media/res/Evidence%20Archive/Survey%20Raw%20Data.pdf",
+    type: "pdf",
+    preview: "",
+    description: "Complete, unfiltered responses from all survey participants, providing transparency and allowing deeper analysis of public experiences with electricity blackouts.",
+  },
   // ... add more files ...
 ];
 
