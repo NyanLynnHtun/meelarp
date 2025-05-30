@@ -148,6 +148,7 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
             <span className="text-white opacity-60">NO</span>
           </div>
           <div className="w-full bg-neutral-800 rounded-full h-6 flex overflow-hidden relative">
+            {/* YES Bar */}
             <div
               className="bg-white h-6 transition-all duration-500"
               style={{
@@ -159,6 +160,7 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
                 opacity: yesPercent > 0 ? 1 : 0,
               }}
             />
+            {/* NO Bar */}
             <div
               className="bg-gray-500 h-6 transition-all duration-500"
               style={{
@@ -170,19 +172,40 @@ const HasCaseSlide = ({ goToCreditSlide }) => {
                 opacity: noPercent > 0 ? 0.2 : 0,
               }}
             />
-            {/* Percentage overlays */}
-            <div
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xs font-bold text-black"
-              style={{ opacity: yesPercent > 0 ? 0.75 : 0 }}
-            >
-              {yesPercent > 0 ? `${yesPercent}%` : ""}
-            </div>
-            <div
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs font-bold text-white"
-              style={{ opacity: noPercent > 0 ? 0.65 : 0 }}
-            >
-              {noPercent > 0 ? `${noPercent}%` : ""}
-            </div>
+            {/* YES Percentage Label */}
+            {yesPercent > 0 && (
+              <div
+                className={`absolute top-1/2 left-3 transform -translate-y-1/2 text-xs font-bold transition-all duration-200 ${
+                  yesPercent < 18
+                    ? "text-white left-3 -translate-x-0"
+                    : "text-black left-3"
+                }`}
+                style={{
+                  // If less than 18%, push text just outside the bar
+                  left: yesPercent < 18 ? "10px" : `${yesPercent / 2}%`,
+                  textShadow: yesPercent < 18 ? "0 1px 4px #222" : "",
+                }}
+              >
+                {`${yesPercent}%`}
+              </div>
+            )}
+            {/* NO Percentage Label */}
+            {noPercent > 0 && (
+              <div
+                className={`absolute top-1/2 right-3 transform -translate-y-1/2 text-xs font-bold transition-all duration-200 ${
+                  noPercent < 18
+                    ? "text-white right-3 -translate-x-0"
+                    : "text-white right-3"
+                }`}
+                style={{
+                  right: noPercent < 18 ? "10px" : `${noPercent / 2}%`,
+                  color: noPercent < 18 ? "#fff" : "#fff",
+                  textShadow: noPercent < 18 ? "0 1px 4px #222" : "",
+                }}
+              >
+                {`${noPercent}%`}
+              </div>
+            )}
           </div>
           <div className="mt-4 text-gray-400 text-sm tracking-wide font-mono">
             <b className="text-white">{voteStats.total}</b> response

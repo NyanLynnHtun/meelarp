@@ -175,7 +175,7 @@ function Slideshow() {
                 className="
                   rounded-xl shadow-xl
                   w-full max-w-3xl
-                  h-auto aspect-[2/2]
+                  h-auto aspect-[1/1]
                   bg-black
                 "
                 style={{
@@ -289,6 +289,7 @@ function Slideshow() {
             <p>{slide.description}</p> */}
           </div>
         );
+        
       case "haveCase":
         return (
           <HasCaseSlide
