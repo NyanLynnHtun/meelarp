@@ -43,10 +43,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ReportPage />} />
+        <Route path="/" element={<SlideShow />} />
+        <Route path="/report" element={<ReportPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/slideshow" element={<SlideShow />} />
-        <Route path="/slideshow/:slideNumber" element={<SlideShow />} />
+        <Route path="/:slideNumber" element={<SlideShow />} />
         <Route path="/exhibitA" element={<ExhibitA />} />
         <Route path="/exhibitB" element={<ExhibitB />} />
         <Route path="/exhibitC" element={<ExhibitC />} />

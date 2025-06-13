@@ -73,7 +73,7 @@ const ExhibitE = () => {
         title="Exhibit E: Evidence Archive"
         prevPath="/exhibitD"
         prevLabel="← Previous"
-        nextPath="/slideshow/3"
+        nextPath="/3"
         nextLabel="Exhibits"
       />
 

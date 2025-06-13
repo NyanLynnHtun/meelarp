@@ -20,7 +20,7 @@ const ExhibitA = () => {
           Exhibit A: Testimonies
         </h1>
         <div className="flex gap-8">
-          <Link to="/slideshow/3">
+          <Link to="/3">
             <motion.button
               className="bg-transparent top-8 right-8 bg-gray-700 hover:bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg transition z-20"
               whileHover={{ scale: 1.1 }}
